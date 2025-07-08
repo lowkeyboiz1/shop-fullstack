@@ -1,24 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MacBook Showcase
+
+A modern, responsive web application built with Next.js to showcase MacBook products with detailed specifications and features.
+
+## Features
+
+- 🎯 **Product Showcase**: Beautiful display of MacBook Air and MacBook Pro models
+- 🔍 **Smart Search**: Real-time search functionality
+- 🎛️ **Advanced Filtering**: Filter by category, chip, year, and price
+- 📊 **Sorting Options**: Sort by name, price, or release date
+- 🖼️ **Image Carousel**: Multiple product images with smooth navigation
+- 📱 **Fully Responsive**: Optimized for all devices
+- ⚡ **Performance Optimized**: Fast loading with skeleton states
+- 🎨 **Modern UI**: Clean design with smooth animations
+
+## Tech Stack
+
+- **Framework**: Next.js 15
+- **UI Components**: Shadcn/ui
+- **State Management**: Jotai
+- **Data Fetching**: TanStack Query (React Query)
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Carousel**: Embla Carousel
 
 ## Getting Started
 
-First, run the development server:
+1. **Install dependencies**:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+   ```bash
+   npm install
+   ```
+
+2. **Run the development server**:
+
+   ```bash
+   npm run dev
+   ```
+
+3. **Open your browser**:
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## Project Structure
+
+```
+src/
+├── app/               # Next.js app directory
+├── components/        # React components
+│   ├── FilterControls.tsx
+│   ├── ImageCarousel.tsx
+│   ├── ProductCard.tsx
+│   ├── ProductDetailModal.tsx
+│   ├── ProductGrid.tsx
+│   ├── ProductSkeleton.tsx
+│   ├── ProductStats.tsx
+│   └── SearchBar.tsx
+├── data/             # Mock product data
+├── store/            # Jotai atoms for state
+├── types/            # TypeScript types
+└── lib/              # Utility functions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Building for Production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
+
+This project is for demonstration purposes only. All MacBook product information and images belong to Apple Inc.
 
 ## Learn More
 
