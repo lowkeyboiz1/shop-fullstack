@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import Header from '@/components/Header'
+import { AppSidebar } from '@/components/app-sidebar'
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { Providers } from '@/components/providers'
 
 const geistSans = Geist({
@@ -14,36 +15,33 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'MacBook Showcase - Explore the Latest MacBook Models',
-  description: 'Discover the complete MacBook lineup with detailed specifications, features, and comparisons. Find your perfect MacBook Air or MacBook Pro.',
+  title: 'MacBook Showcase Admin - Quản lý sản phẩm MacBook',
+  description: 'Trang quản trị hệ thống MacBook Showcase với đầy đủ tính năng quản lý sản phẩm, danh mục và hình ảnh.',
   metadataBase: new URL('https://macbook-showcase.com'),
   alternates: {
-    canonical: '/'
+    canonical: '/admin'
   },
   robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1
-    }
-  },
-  verification: {
-    google: 'your-google-site-verification-code'
+    index: false,
+    follow: false
   }
 }
 
-export default function RootLayout({
+export default function AuthLayout({
   children
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
     <html lang='vi'>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Providers>
+          <SidebarProvider>
+            <AppSidebar />
+            <SidebarInset className='min-h-screen'>{children}</SidebarInset>
+          </SidebarProvider>
+        </Providers>
+      </body>
     </html>
   )
 }

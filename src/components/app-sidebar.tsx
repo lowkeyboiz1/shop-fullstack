@@ -1,27 +1,7 @@
 'use client'
 
+import { AudioWaveform, Command, GalleryVerticalEnd, Package, ShoppingCart, Image as ImageIcon } from 'lucide-react'
 import * as React from 'react'
-import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
-  Package,
-  Plus,
-  List,
-  Settings,
-  LayoutDashboard,
-  Users,
-  ShoppingCart,
-  User,
-  LogOut
-} from 'lucide-react'
 
 import { NavMain } from '@/components/nav-main'
 import { NavUser } from '@/components/nav-user'
@@ -65,14 +45,6 @@ const data = {
         {
           title: 'Tất cả sản phẩm',
           url: '/products'
-        },
-        {
-          title: 'Quản lý sản phẩm',
-          url: '/products/manage'
-        },
-        {
-          title: 'Danh mục',
-          url: '/products/categories'
         }
       ]
     },
@@ -94,7 +66,7 @@ const data = {
     {
       title: 'Hình ảnh',
       url: '/images',
-      icon: Users
+      icon: ImageIcon
     }
   ]
 }

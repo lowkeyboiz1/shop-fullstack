@@ -124,7 +124,9 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
                 {isLoading && <SearchSkeleton />}
 
                 {/* No Results */}
-                {!isLoading && searchQuery.trim() && searchResults.length === 0 && <div className='p-8 text-center text-gray-500 dark:text-gray-400'>Không tìm thấy kết quả cho "{searchQuery}"</div>}
+                {!isLoading && searchQuery.trim() && searchResults.length === 0 && (
+                  <div className='p-8 text-center text-gray-500 dark:text-gray-400'>Không tìm thấy kết quả cho &quot;{searchQuery}&quot;</div>
+                )}
 
                 {/* Search Results */}
                 {!isLoading && searchResults.length > 0 && (
