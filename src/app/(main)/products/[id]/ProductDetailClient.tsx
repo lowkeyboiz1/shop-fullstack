@@ -26,44 +26,8 @@ export function ProductDetailClient({ product, memoryOptions, storageOptions, co
   const [selectedMemory, setSelectedMemory] = useState(product.ram[0] || '8GB')
   const [selectedStorage, setSelectedStorage] = useState(product.storage[0] || '256GB')
 
-  const getSelectedPrice = () => {
-    const memoryPrice = memoryOptions.find((m) => m.size === selectedMemory)?.price || 0
-    const storagePrice = storageOptions.find((s) => s.size === selectedStorage)?.price || 0
-    return product.price + memoryPrice + storagePrice
-  }
-
   return (
     <div className='space-y-6'>
-      {/* Action Buttons */}
-      <div className='flex gap-2'>
-        <Button
-          size='icon'
-          variant='secondary'
-          className='rounded-full'
-          onClick={() => {
-            // Add to favorites logic
-            console.log('Added to favorites')
-          }}
-        >
-          <Heart className='h-4 w-4' />
-        </Button>
-        <Button
-          size='icon'
-          variant='secondary'
-          className='rounded-full'
-          onClick={() => {
-            // Share functionality
-            navigator.share?.({
-              title: `${product.name} ${product.model}`,
-              text: product.description,
-              url: window.location.href
-            })
-          }}
-        >
-          <Share2 className='h-4 w-4' />
-        </Button>
-      </div>
-
       {/* Memory Selection */}
       <div>
         <h3 className='mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900'>
@@ -138,25 +102,6 @@ export function ProductDetailClient({ product, memoryOptions, storageOptions, co
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Add to Cart Button */}
-      <div className='pt-6'>
-        <Button
-          className='h-14 w-full bg-gradient-to-r from-blue-600 to-blue-700 text-lg font-semibold shadow-lg transition-all hover:from-blue-700 hover:to-blue-800 hover:shadow-xl'
-          onClick={() => {
-            // Add to cart logic
-            console.log('Added to cart:', {
-              product: product.name,
-              memory: selectedMemory,
-              storage: selectedStorage,
-              color: product.color[selectedColor],
-              price: getSelectedPrice()
-            })
-          }}
-        >
-          Add to Cart - ${getSelectedPrice().toLocaleString()}
-        </Button>
       </div>
     </div>
   )

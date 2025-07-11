@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useCallback } from 'react'
+import Image from 'next/image'
 import useEmblaCarousel from 'embla-carousel-react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -30,7 +31,7 @@ export function ImageCarousel({ images, alt }: ImageCarouselProps) {
           {images.map((image, index) => (
             <div key={index} className='relative min-w-0 flex-[0_0_100%]'>
               <div className='relative aspect-[16/10] bg-gradient-to-br from-gray-50 to-gray-100'>
-                <img src={image} alt={`${alt} - Image ${index + 1}`} className='h-full w-full object-contain p-8' />
+                <Image src={image} alt={`${alt} - Image ${index + 1}`} fill className='object-contain p-8' />
               </div>
             </div>
           ))}

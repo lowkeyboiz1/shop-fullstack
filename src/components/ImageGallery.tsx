@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { MoreHorizontal, Download, Trash2, Edit, Eye, Copy } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -35,10 +36,11 @@ function ImageCard({ image, onAction }: ImageCardProps) {
       <CardContent className='relative p-0'>
         {/* Image container */}
         <div className='relative aspect-square overflow-hidden bg-gray-100'>
-          <img
+          <Image
             src={image.url}
             alt={image.name}
-            className='h-full w-full object-cover transition-transform duration-200 group-hover:scale-105'
+            fill
+            className='object-cover transition-transform duration-200 group-hover:scale-105'
             onError={(e) => {
               const target = e.target as HTMLImageElement
               target.src = '/placeholder-image.jpg'
@@ -58,7 +60,9 @@ function ImageCard({ image, onAction }: ImageCardProps) {
                   <DialogTitle>{image.name}</DialogTitle>
                 </DialogHeader>
                 <div className='flex justify-center'>
-                  <img src={image.url} alt={image.name} className='max-h-96 max-w-full object-contain' />
+                  <div className='relative max-h-96 max-w-full'>
+                    <Image src={image.url} alt={image.name} width={500} height={384} className='max-h-96 max-w-full object-contain' />
+                  </div>
                 </div>
                 <div className='grid grid-cols-2 gap-4 text-sm'>
                   <div>

@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useAtom } from 'jotai'
 import { filteredProductsAtom } from '@/store/atoms'
+import { PromotionalOffer, PRODUCT_TAGS } from '@/types/product'
+import { useAtom } from 'jotai'
+import { useEffect, useState } from 'react'
 import { ProductCard } from './ProductCard'
 import { ProductGridSkeleton } from './ProductSkeleton'
 
@@ -17,6 +18,12 @@ export function ProductGrid() {
     }, 800)
     return () => clearTimeout(timer)
   }, [])
+
+  // Sample tag data with proper typing
+  const getProductOffers = (index: number): PromotionalOffer => {
+    const offers: PromotionalOffer[] = [{ tag: 'Bán chạy' }, { tag: 'Mới ra mắt' }, { tag: 'Bán chạy' }, { tag: 'Mới ra mắt' }, { tag: 'Bán chạy' }, { tag: 'Mới ra mắt' }, {}, {}]
+    return offers[index % offers.length]
+  }
 
   if (isLoading) {
     return <ProductGridSkeleton />
@@ -35,19 +42,22 @@ export function ProductGrid() {
 
   return (
     <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-      {products.map((product, index) => (
-        <div
-          key={product.id}
-          className='animate-in fade-in-50 slide-in-from-bottom-3'
-          style={{
-            animationDuration: '500ms',
-            animationDelay: `${index * 50}ms`,
-            animationFillMode: 'backwards'
-          }}
-        >
-          <ProductCard product={product} />
-        </div>
-      ))}
+      {products.map((product, index) => {
+        const { tag } = getProductOffers(index)
+        return (
+          <div
+            key={product.id}
+            className='animate-in fade-in-50 slide-in-from-bottom-3'
+            style={{
+              animationDuration: '500ms',
+              animationDelay: `${index * 50}ms`,
+              animationFillMode: 'backwards'
+            }}
+          >
+            <ProductCard product={product} tag={tag} />
+          </div>
+        )
+      })}
     </div>
   )
 }

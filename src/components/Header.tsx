@@ -11,52 +11,75 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import SearchModal from './SearchModal'
 
-const navItems = [
+interface NavItem {
+  labelKey: string
+  href: string
+  children?: {
+    labelKey: string
+    href: string
+    description: string
+  }[]
+}
+
+const navItems: NavItem[] = [
   {
-    labelKey: 'Sản phẩm mới',
-    href: '/new-arrivals'
+    labelKey: 'Trang chủ',
+    href: '/'
   },
   {
-    labelKey: 'MacBook',
-    href: '/products/macbook',
+    labelKey: 'Sản phẩm',
+    href: '/products',
     children: [
       {
         labelKey: 'MacBook Air',
         href: '/products/macbook-air',
-        description: 'Siêu mỏng, siêu nhẹ, siêu mạnh mẽ.'
+        description: 'Laptop mỏng nhẹ, hiệu suất cao'
       },
       {
-        labelKey: 'MacBook Pro 14',
-        href: '/products/macbook-pro-14',
-        description: 'Hiệu năng đỉnh cao cho công việc chuyên nghiệp.'
+        labelKey: 'MacBook Pro',
+        href: '/products/macbook-pro',
+        description: 'Laptop chuyên nghiệp cho công việc nặng'
       },
       {
-        labelKey: 'MacBook Pro 16',
-        href: '/products/macbook-pro-16',
-        description: 'Màn hình lớn, sức mạnh không giới hạn.'
+        labelKey: 'iMac',
+        href: '/products/imac',
+        description: 'Máy tính để bàn All-in-One'
+      },
+      {
+        labelKey: 'Mac mini',
+        href: '/products/mac-mini',
+        description: 'Máy tính để bàn nhỏ gọn'
       }
     ]
   },
   {
-    labelKey: 'Phụ kiện',
-    href: '/products/accessories',
+    labelKey: 'Dịch vụ',
+    href: '/services',
     children: [
       {
-        labelKey: 'Sạc & Cáp',
-        href: '/products/accessories/chargers',
-        description: 'Luôn đảm bảo năng lượng cho thiết bị của bạn.'
+        labelKey: 'Bảo hành',
+        href: '/services/warranty',
+        description: 'Dịch vụ bảo hành chính hãng'
       },
       {
-        labelKey: 'Vỏ & Bao da',
-        href: '/products/accessories/cases',
-        description: 'Bảo vệ MacBook của bạn khỏi va đập và trầy xước.'
+        labelKey: 'Sửa chữa',
+        href: '/services/repair',
+        description: 'Dịch vụ sửa chữa chuyên nghiệp'
       },
       {
-        labelKey: 'Magic Keyboard & Mouse',
-        href: '/products/accessories/keyboards-mice',
-        description: 'Tăng cường trải nghiệm làm việc và sáng tạo.'
+        labelKey: 'Tư vấn',
+        href: '/services/consultation',
+        description: 'Tư vấn chọn máy phù hợp'
       }
     ]
+  },
+  {
+    labelKey: 'Về chúng tôi',
+    href: '/about'
+  },
+  {
+    labelKey: 'Liên hệ',
+    href: '/contact'
   }
 ]
 
@@ -126,7 +149,7 @@ const Header = () => {
             </Link>
             {/* Desktop Navigation */}
             <motion.nav onMouseLeave={() => setHovered(null)} className={`hidden items-center space-x-1 text-black lg:flex`}>
-              {navItems.map((item, index) => {
+              {navItems.map((item: NavItem, index: number) => {
                 const isHovered = hovered === index
                 return (
                   <motion.div key={item.labelKey} onMouseEnter={() => handleMouseEnter(index)} className='relative'>
@@ -249,7 +272,7 @@ const Header = () => {
       >
         <div className='flex h-full flex-col p-6'>
           <nav className='flex flex-col space-y-2' aria-label='mobileNavAriaLabel'>
-            {navItems.map((item, index) =>
+            {navItems.map((item: NavItem, index: number) =>
               item.children ? (
                 <motion.div
                   key={item.labelKey}

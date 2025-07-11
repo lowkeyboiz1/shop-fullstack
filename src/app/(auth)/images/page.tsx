@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
 import { Separator } from '@/components/ui/separator'
 import { SidebarTrigger } from '@/components/ui/sidebar'
@@ -332,7 +333,7 @@ export default function ImagesPage() {
             <CardHeader>
               <div className='flex items-center justify-between'>
                 <div>
-                  <CardTitle>Hình ảnh trong "{selectedFolderName}"</CardTitle>
+                  <CardTitle>Hình ảnh trong &ldquo;{selectedFolderName}&rdquo;</CardTitle>
                   <CardDescription>{currentImages.length} hình ảnh</CardDescription>
                 </div>
                 <Dialog open={isAddImageDialogOpen} onOpenChange={setIsAddImageDialogOpen}>
@@ -357,7 +358,7 @@ export default function ImagesPage() {
                         <div className='grid grid-cols-4 items-center gap-4'>
                           <Label className='text-right'>Preview</Label>
                           <div className='col-span-3'>
-                            <img src={URL.createObjectURL(newImageFile)} alt={newImageFile.name} className='h-20 w-20 rounded border object-cover' />
+                            <Image src={URL.createObjectURL(newImageFile)} alt={newImageFile.name} width={80} height={80} className='h-20 w-20 rounded border object-cover' />
                           </div>
                         </div>
                       )}
