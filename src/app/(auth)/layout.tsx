@@ -1,18 +1,7 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
 import { AppSidebar } from '@/components/app-sidebar'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { Providers } from '@/components/providers'
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin']
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin']
-})
 
 export const metadata: Metadata = {
   title: 'MacBook Showcase Admin - Quản lý sản phẩm MacBook',
@@ -33,15 +22,11 @@ export default function AuthLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='vi'>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Providers>
-          <SidebarProvider>
-            <AppSidebar />
-            <SidebarInset className='min-h-screen'>{children}</SidebarInset>
-          </SidebarProvider>
-        </Providers>
-      </body>
-    </html>
+    <Providers>
+      <SidebarProvider>
+        <AppSidebar />
+        <SidebarInset className='min-h-screen'>{children}</SidebarInset>
+      </SidebarProvider>
+    </Providers>
   )
 }

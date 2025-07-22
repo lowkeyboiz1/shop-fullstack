@@ -27,10 +27,10 @@ export const macbookProducts: MacBookProduct[] = [
     dimensions: '13.40 x 9.35 x 0.45 inches',
     color: ['Midnight', 'Starlight', 'Space Gray', 'Silver'],
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mba15-midnight-select-202306?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1684518479433',
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mba15-gallery1-202306?wid=4000&hei=3072&fmt=jpeg&qlt=90&.v=1683846366669',
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mba15-gallery2-202306?wid=4000&hei=3072&fmt=jpeg&qlt=90&.v=1683915915756',
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mba15-gallery3-202306?wid=4000&hei=3072&fmt=jpeg&qlt=90&.v=1683915914894'
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iIzlDQTNBRiI+TWFjQm9vazwvdGV4dD4KPC9zdmc+',
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRUVGMkZGIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iIzYzNjZGMSI+QWlyPC90ZXh0Pgo8L3N2Zz4=',
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRkVGM0YyIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iI0Y5NzMxNiI+TTNAM1wvdGV4dD4KPC9zdmc+',
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRkJGQ0ZERO5UyByZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRkJGQ0RERO5UyByZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRkJGQ0RERO5UyxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRkJGQ0RESO5UaWxsPSIjMTA3QzEwIj4xNSZxdW90OzwvdGV4dD4KPC9zdmc+'
     ],
     description: 'The 15-inch MacBook Air is impossibly thin and has a stunning Liquid Retina display. Supercharged by the M3 chip.',
     features: ['Liquid Retina display', 'MagSafe charging', '1080p FaceTime HD camera', 'Six-speaker sound system', 'Touch ID', 'Force Touch trackpad'],
@@ -63,10 +63,10 @@ export const macbookProducts: MacBookProduct[] = [
     dimensions: '11.97 x 8.46 x 0.44 inches',
     color: ['Midnight', 'Starlight', 'Space Gray', 'Silver'],
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mba13-midnight-select-202402?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1708367688034',
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mba13-gallery1-202402?wid=4000&hei=3072&fmt=jpeg&qlt=90&.v=1707263270546',
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mba13-gallery2-202402?wid=4000&hei=3072&fmt=jpeg&qlt=90&.v=1707840856972',
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mba13-gallery3-202402?wid=4000&hei=3072&fmt=jpeg&qlt=90&.v=1707840857227'
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iIzlDQTNBRiI+QWlyIDEzIjwvdGV4dD4KPC9zdmc+',
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRUVGMkZGIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iIzYzNjZGMSI+TTMgQ2hpcDwvdGV4dD4KPC9zdmc+',
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRkVGM0YyIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iI0Y5NzMxNiI+TWFjQm9vazwvdGV4dD4KPC9zdmc+',
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRkJGREZFIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iIzEwN0MxMCI+QWlyIDEzIjwvdGV4dD4KPC9zdmc+'
     ],
     description: 'MacBook Air 13" sails through work and play. Supercharged by the M3 chip with an 8-core CPU and 8-core GPU.',
     features: ['Liquid Retina display', 'MagSafe charging', '1080p FaceTime HD camera', 'Four-speaker sound system', 'Touch ID', 'Force Touch trackpad'],
@@ -99,8 +99,8 @@ export const macbookProducts: MacBookProduct[] = [
     dimensions: '12.31 x 8.71 x 0.60 inches',
     color: ['Space Black', 'Silver'],
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp14-m3-pro-max-space-black-select-202310?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1697311054011',
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp14-gallery1-202310?wid=4000&hei=3072&fmt=jpeg&qlt=90&.v=1697553707718'
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMUYyOTM3Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iI0Y5RkFGQiI+UHJvIDE0IjwvdGV4dD4KPC9zdmc+',
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMzc0MTUxIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iI0Y5RkFGQiI+TTMgUHJvPC90ZXh0Pgo8L3N2Zz4='
     ],
     description: 'The 14-inch MacBook Pro with M3 Pro chip is a powerhouse for demanding workflows with incredible performance and battery life.',
     features: ['Liquid Retina XDR display', 'ProMotion technology', '1080p FaceTime HD camera', 'Six-speaker sound system', 'Studio-quality mics', 'HDMI port', 'SDXC card slot', 'MagSafe 3'],
@@ -133,8 +133,8 @@ export const macbookProducts: MacBookProduct[] = [
     dimensions: '12.31 x 8.71 x 0.61 inches',
     color: ['Space Black', 'Silver'],
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp14-m3-pro-max-space-black-select-202310?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1697311054011',
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp14-gallery2-202310?wid=4000&hei=3072&fmt=jpeg&qlt=90&.v=1697229861229'
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMTExODI3Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iI0Y5RkFGQiI+TTMgTWF4PC90ZXh0Pgo8L3N2Zz4=',
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMEYxNDJBIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iI0Y5RkFGQiI+MTQiPC90ZXh0Pgo8L3N2Zz4='
     ],
     description: 'MacBook Pro 14" with M3 Max takes performance to new extremes with the most advanced chip ever built for a personal computer.',
     features: [
@@ -177,8 +177,8 @@ export const macbookProducts: MacBookProduct[] = [
     dimensions: '14.01 x 9.77 x 0.66 inches',
     color: ['Space Black', 'Silver'],
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16-m3-pro-max-space-black-select-202310?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1697311054013',
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16-gallery1-202310?wid=4000&hei=3072&fmt=jpeg&qlt=90&.v=1697230830244'
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMUYyOTM3Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iI0Y5RkFGQiI+UHJvIDE2IjwvdGV4dD4KPC9zdmc+',
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMzc0MTUxIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iI0Y5RkFGQiI+MTYiPC90ZXh0Pgo8L3N2Zz4='
     ],
     description: 'The 16-inch MacBook Pro with M3 Pro delivers phenomenal performance for the most demanding pro workflows.',
     features: ['Liquid Retina XDR display', 'ProMotion technology', '1080p FaceTime HD camera', 'Six-speaker sound system', 'Studio-quality mics', 'HDMI port', 'SDXC card slot', 'MagSafe 3'],
@@ -211,8 +211,8 @@ export const macbookProducts: MacBookProduct[] = [
     dimensions: '14.01 x 9.77 x 0.66 inches',
     color: ['Space Black', 'Silver'],
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16-m3-pro-max-space-black-select-202310?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1697311054013',
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16-gallery2-202310?wid=4000&hei=3072&fmt=jpeg&qlt=90&.v=1697230830200'
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMUMxOTI3Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iI0Y5RkFGQiI+TTMgTWF4PC90ZXh0Pgo8L3N2Zz4=',
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMTUxNzI3Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iI0Y5RkFGQiI+MTYiIDwvdGV4dD4KPC9zdmc+'
     ],
     description: 'The most powerful MacBook Pro ever with M3 Max chip. Built for the most extreme workflows.',
     features: [
@@ -255,8 +255,8 @@ export const macbookProducts: MacBookProduct[] = [
     dimensions: '11.97 x 8.46 x 0.44 inches',
     color: ['Midnight', 'Starlight', 'Space Gray', 'Silver'],
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/macbook-air-midnight-select-20220606?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1653084303665',
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/macbook-air-gallery1-20220606?wid=4000&hei=3072&fmt=jpeg&qlt=90&.v=1653081456435'
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iIzlDQTNBRiI+QWlyIE0yPC90ZXh0Pgo8L3N2Zz4=',
+      'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRUVGMkZGIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iIzYzNjZGMSI+TTIgQ2hpcDwvdGV4dD4KPC9zdmc+'
     ],
     description: 'Redesigned around the M2 chip, MacBook Air is thinner, lighter, and faster with a bigger display.',
     features: ['Liquid Retina display', 'MagSafe charging', '1080p FaceTime HD camera', 'Four-speaker sound system', 'Touch ID', 'Force Touch trackpad'],

@@ -155,7 +155,7 @@ const Header = () => {
                   <motion.div key={item.labelKey} onMouseEnter={() => handleMouseEnter(index)} className='relative'>
                     <Link
                       href={item.href}
-                      className='relative flex cursor-pointer items-center rounded-md px-3 py-2 font-medium transition-all duration-200 hover:text-[#2EAF5D]'
+                      className='relative flex cursor-pointer items-center rounded-md px-3 py-2 font-medium whitespace-nowrap transition-all duration-200 hover:text-[#2EAF5D]'
                       aria-label={item.labelKey}
                     >
                       {isHovered && <motion.div layoutId='hovered' className='absolute inset-0 h-full w-full rounded-full bg-gray-100 dark:bg-neutral-800' />}

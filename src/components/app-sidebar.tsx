@@ -40,11 +40,11 @@ const data = {
       items: [
         {
           title: 'Đăng sản phẩm',
-          url: '/products/create'
+          url: '/admin/products/create'
         },
         {
           title: 'Tất cả sản phẩm',
-          url: '/products'
+          url: '/admin/products/all'
         }
       ]
     },
@@ -55,11 +55,11 @@ const data = {
       items: [
         {
           title: 'Tạo danh mục mới',
-          url: '/categories/new'
+          url: '/admin/categories/new'
         },
         {
           title: 'Tất cả danh mục',
-          url: '/categories/all'
+          url: '/admin/categories/all'
         }
       ]
     },

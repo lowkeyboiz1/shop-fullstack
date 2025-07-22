@@ -44,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='vi'>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
         <Header />
         {children}
         <Footer />
