@@ -1,18 +1,16 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Image from 'next/image'
-import { TProduct } from '@/types/product'
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { Textarea } from '@/components/ui/textarea'
-import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Save, X, Edit, Package, Monitor, Cpu, HardDrive, Battery, Calendar, DollarSign, Plus, Trash2 } from 'lucide-react'
-import { formatPrice } from '@/lib/utils'
+import { TProduct } from '@/types/product'
+import { Cpu, HardDrive, Package, Plus, Save, Trash2, X } from 'lucide-react'
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
 
 interface ProductDetailDrawerProps {
   product: TProduct | null
@@ -22,28 +20,16 @@ interface ProductDetailDrawerProps {
 }
 
 export function ProductDetailDrawer({ product, isOpen, onClose, onSave }: ProductDetailDrawerProps) {
-  const [isEditing, setIsEditing] = useState(true)
-  const [editedProduct, setEditedProduct] = useState<TProduct | null>(null)
-
-  useEffect(() => {
-    if (product) {
-      setEditedProduct({ ...product })
-    }
-    setIsEditing(true)
-  }, [product])
+  const [editedProduct, setEditedProduct] = useState<TProduct | null>(product)
 
   const handleSave = () => {
     if (editedProduct && onSave) {
       onSave(editedProduct)
-      setIsEditing(false)
     }
   }
 
   const handleCancel = () => {
-    if (product) {
-      setEditedProduct({ ...product })
-    }
-    setIsEditing(false)
+    setEditedProduct(product)
   }
 
   const updateField = (field: keyof TProduct, value: any) => {
@@ -51,20 +37,6 @@ export function ProductDetailDrawer({ product, isOpen, onClose, onSave }: Produc
       setEditedProduct({
         ...editedProduct,
         [field]: value
-      })
-    }
-  }
-
-  const updateOption = (optionIndex: number, field: 'name', value: string) => {
-    if (editedProduct) {
-      const updatedOptions = [...editedProduct.options]
-      updatedOptions[optionIndex] = {
-        ...updatedOptions[optionIndex],
-        [field]: value
-      }
-      setEditedProduct({
-        ...editedProduct,
-        options: updatedOptions
       })
     }
   }
@@ -169,28 +141,17 @@ export function ProductDetailDrawer({ product, isOpen, onClose, onSave }: Produc
               <div className='grid grid-cols-1 gap-4'>
                 <div>
                   <Label htmlFor='title'>Tên sản phẩm</Label>
-                  {isEditing ? <Input id='title' value={editedProduct.title} onChange={(e) => updateField('title', e.target.value)} /> : <p className='mt-1 text-sm font-medium'>{product.title}</p>}
+                  <Input id='title' value={editedProduct.title} onChange={(e) => updateField('title', e.target.value)} />
                 </div>
 
                 <div>
                   <Label htmlFor='description'>Mô tả</Label>
-                  {isEditing ? (
-                    <Textarea id='description' value={editedProduct.description} onChange={(e) => updateField('description', e.target.value)} rows={4} />
-                  ) : (
-                    <p className='mt-1 text-sm text-gray-600'>{product.description}</p>
-                  )}
+                  <Textarea id='description' value={editedProduct.description} onChange={(e) => updateField('description', e.target.value)} rows={4} />
                 </div>
 
                 <div>
                   <Label htmlFor='basePrice'>Giá cơ bản</Label>
-                  {isEditing ? (
-                    <Input id='basePrice' type='number' value={editedProduct.basePrice} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('basePrice', parseInt(e.target.value))} />
-                  ) : (
-                    <div className='mt-1 flex items-center gap-1'>
-                      <DollarSign className='h-4 w-4 text-green-600' />
-                      <span className='text-sm font-semibold text-green-600'>{formatPrice(product.basePrice)}đ</span>
-                    </div>
-                  )}
+                  <Input id='basePrice' type='number' value={editedProduct.basePrice} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('basePrice', parseInt(e.target.value))} />
                 </div>
 
                 <div>
@@ -228,37 +189,26 @@ export function ProductDetailDrawer({ product, isOpen, onClose, onSave }: Produc
                   <div className='space-y-2'>
                     {option.variants.map((variant, variantIndex) => (
                       <div key={variantIndex} className='flex items-center gap-2'>
-                        {isEditing ? (
-                          <>
-                            <Input placeholder='Variant label' value={variant.label} onChange={(e) => updateVariant(optionIndex, variantIndex, 'label', e.target.value)} className='flex-1' />
-                            <Input
-                              type='number'
-                              placeholder='Price diff'
-                              value={variant.priceDiff}
-                              onChange={(e) => updateVariant(optionIndex, variantIndex, 'priceDiff', parseInt(e.target.value) || 0)}
-                              className='w-24'
-                            />
-                            <Button variant='outline' size='sm' onClick={() => removeVariant(optionIndex, variantIndex)}>
-                              <Trash2 className='h-4 w-4' />
-                            </Button>
-                          </>
-                        ) : (
-                          <div className='flex w-full items-center justify-between'>
-                            <Badge variant='outline' className='text-xs'>
-                              {variant.label}
-                            </Badge>
-                            {variant.priceDiff > 0 && <span className='text-xs text-green-600'>+${variant.priceDiff}</span>}
-                          </div>
-                        )}
+                        <>
+                          <Input placeholder='Variant label' value={variant.label} onChange={(e) => updateVariant(optionIndex, variantIndex, 'label', e.target.value)} className='flex-1' />
+                          <Input
+                            type='number'
+                            placeholder='Price diff'
+                            value={variant.priceDiff}
+                            onChange={(e) => updateVariant(optionIndex, variantIndex, 'priceDiff', parseInt(e.target.value) || 0)}
+                            className='w-24'
+                          />
+                          <Button variant='outline' size='sm' onClick={() => removeVariant(optionIndex, variantIndex)}>
+                            <Trash2 className='h-4 w-4' />
+                          </Button>
+                        </>
                       </div>
                     ))}
 
-                    {isEditing && (
-                      <Button variant='outline' size='sm' onClick={() => addVariant(optionIndex)} className='gap-1'>
-                        <Plus className='h-4 w-4' />
-                        Add Variant
-                      </Button>
-                    )}
+                    <Button variant='outline' size='sm' onClick={() => addVariant(optionIndex)} className='gap-1'>
+                      <Plus className='h-4 w-4' />
+                      Add Variant
+                    </Button>
                   </div>
                 </div>
               ))}

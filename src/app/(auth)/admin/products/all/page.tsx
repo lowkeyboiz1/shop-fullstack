@@ -1,23 +1,20 @@
 'use client'
 
-import { useState, useCallback, useMemo } from 'react'
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
-import { Separator } from '@/components/ui/separator'
-import { SidebarTrigger } from '@/components/ui/sidebar'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import { Plus, Search, Filter, MoreHorizontal, Edit, Trash2, Eye } from 'lucide-react'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { AdminProductTable } from '@/components/AdminProductTable'
 import { ProductDetailDrawer } from '@/components/ProductDetailDrawer'
-import { useAtom } from 'jotai'
-import { filteredProductsAtom, filterOptionsAtom, sortOptionAtom, searchQueryAtom } from '@/store/atoms'
-import { TProduct } from '@/types/product'
-import Link from 'next/link'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Separator } from '@/components/ui/separator'
+import { SidebarTrigger } from '@/components/ui/sidebar'
+import { filteredProductsAtom, searchQueryAtom } from '@/store/atoms'
+import { TProduct } from '@/types/product'
+import { useAtom } from 'jotai'
+import { Plus, Search } from 'lucide-react'
+import Link from 'next/link'
+import { useCallback, useMemo, useState } from 'react'
 
 export default function AdminProductsPage() {
   const [products] = useAtom(filteredProductsAtom)
@@ -69,6 +66,7 @@ export default function AdminProductsPage() {
   }, [])
 
   const handleViewProduct = useCallback((product: TProduct) => {
+    console.log('Product viewed:', product)
     setSelectedProduct(product)
     setIsDrawerOpen(true)
   }, [])
