@@ -1,6 +1,6 @@
 'use client'
 
-import { AudioWaveform, Command, GalleryVerticalEnd, Package, ShoppingCart, Image as ImageIcon } from 'lucide-react'
+import { GalleryVerticalEnd, Package, ShoppingCart, Image as ImageIcon } from 'lucide-react'
 import * as React from 'react'
 
 import { NavMain } from '@/components/nav-main'
@@ -20,16 +20,6 @@ const data = {
       name: 'Mac Store',
       logo: GalleryVerticalEnd,
       plan: 'Enterprise'
-    },
-    {
-      name: 'Tech Shop',
-      logo: AudioWaveform,
-      plan: 'Pro'
-    },
-    {
-      name: 'Electronics',
-      logo: Command,
-      plan: 'Basic'
     }
   ],
   navMain: [
@@ -40,7 +30,7 @@ const data = {
       items: [
         {
           title: 'Đăng sản phẩm',
-          url: '/admin/products/create'
+          url: '/admin/products/new'
         },
         {
           title: 'Tất cả sản phẩm',

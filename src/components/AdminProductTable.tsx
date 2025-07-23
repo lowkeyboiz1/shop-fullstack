@@ -15,25 +15,22 @@ interface AdminProductTableProps {
   currentPage: number
   totalPages: number
   onPageChange: (page: number) => void
-  onViewProduct?: (product: TProduct) => void
+  onHandleAction: (action: string, product: TProduct) => void
 }
 
 interface ProductRowProps {
   product: TProduct
   index: number
-  onViewProduct?: (product: TProduct) => void
+  onHandleAction: (action: string, product: TProduct) => void
 }
 
-function ProductRow({ product, index, onViewProduct }: ProductRowProps) {
+function ProductRow({ product, index, onHandleAction }: ProductRowProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const handleAction = (action: string) => {
+  const handleAction = (action: string, product: TProduct) => {
     console.log(`${action}:`, product.title)
     setIsMenuOpen(false)
-
-    if (action === 'view' && onViewProduct) {
-      onViewProduct(product)
-    }
+    onHandleAction(action, product)
     // TODO: Implement other CRUD actions
   }
 
@@ -121,12 +118,12 @@ function ProductRow({ product, index, onViewProduct }: ProductRowProps) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end' className='w-40'>
-            <DropdownMenuItem onClick={() => handleAction('view')}>
+            <DropdownMenuItem onClick={() => handleAction('view', product)}>
               <Eye className='mr-2 h-4 w-4' />
               Xem chi tiết
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => handleAction('delete')} className='text-red-600 focus:text-red-600'>
+            <DropdownMenuItem onClick={() => handleAction('delete', product)} className='text-red-600 focus:text-red-600'>
               <Trash2 className='mr-2 h-4 w-4' />
               Xóa
             </DropdownMenuItem>
@@ -137,7 +134,7 @@ function ProductRow({ product, index, onViewProduct }: ProductRowProps) {
   )
 }
 
-export function AdminProductTable({ products, currentPage, totalPages, onPageChange, onViewProduct }: AdminProductTableProps) {
+export function AdminProductTable({ products, currentPage, totalPages, onPageChange, onHandleAction }: AdminProductTableProps) {
   const generatePageNumbers = () => {
     const pages = []
     const maxVisiblePages = 5
@@ -191,12 +188,12 @@ export function AdminProductTable({ products, currentPage, totalPages, onPageCha
                 <th className='px-4 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase'>RAM / Storage</th>
                 <th className='px-4 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase'>Giá</th>
                 <th className='px-4 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase'>Màu sắc</th>
-                <th className='px-4 py-3 text-right text-xs font-medium tracking-wide text-gray-500 uppercase'>Thao tác</th>
+                <th className='px-4 py-3 text-right text-xs font-medium tracking-wide whitespace-nowrap text-gray-500 uppercase'>Thao tác</th>
               </tr>
             </thead>
             <tbody className='divide-y divide-gray-200 bg-white'>
               {products.map((product, index) => (
-                <ProductRow key={product.title} product={product} index={index} onViewProduct={onViewProduct} />
+                <ProductRow key={product.title} product={product} index={index} onHandleAction={onHandleAction} />
               ))}
             </tbody>
           </table>

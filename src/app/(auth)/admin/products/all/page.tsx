@@ -17,15 +17,16 @@ import { useAtom } from 'jotai'
 import { filteredProductsAtom, filterOptionsAtom, sortOptionAtom, searchQueryAtom } from '@/store/atoms'
 import { TProduct } from '@/types/product'
 import Link from 'next/link'
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
 
 export default function AdminProductsPage() {
   const [products] = useAtom(filteredProductsAtom)
-  const [filters, setFilters] = useAtom(filterOptionsAtom)
-  const [sortOption, setSortOption] = useAtom(sortOptionAtom)
   const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom)
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedProduct, setSelectedProduct] = useState<TProduct | null>(null)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const [productToDelete, setProductToDelete] = useState<TProduct | null>(null)
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const itemsPerPage = 10
 
   // Memoized calculations
@@ -52,29 +53,45 @@ export default function AdminProductsPage() {
     [setSearchQuery]
   )
 
-  const handleCategoryFilter = useCallback(
-    (category: string | undefined) => {
-      setFilters((prev) => ({ ...prev, category: category === 'all' ? undefined : category }))
-      setCurrentPage(1)
-    },
-    [setFilters]
-  )
-
-  const handleSortChange = useCallback(
-    (sort: string) => {
-      setSortOption(sort as any)
-      setCurrentPage(1)
-    },
-    [setSortOption]
-  )
-
   const handlePageChange = useCallback((page: number) => {
     setCurrentPage(page)
+  }, [])
+
+  const handleAction = useCallback((action: string, product: TProduct) => {
+    switch (action) {
+      case 'view':
+        handleViewProduct(product)
+        break
+      case 'delete':
+        handleDeleteProduct(product)
+        break
+    }
   }, [])
 
   const handleViewProduct = useCallback((product: TProduct) => {
     setSelectedProduct(product)
     setIsDrawerOpen(true)
+  }, [])
+
+  const handleDeleteProduct = useCallback((product: TProduct) => {
+    setProductToDelete(product)
+    setIsDeleteDialogOpen(true)
+  }, [])
+
+  const confirmDeleteProduct = useCallback(() => {
+    if (productToDelete) {
+      console.log('Product deleted:', productToDelete)
+      // TODO: Implement delete logic (call API)
+
+      // Close dialog and reset state
+      setIsDeleteDialogOpen(false)
+      setProductToDelete(null)
+    }
+  }, [productToDelete])
+
+  const cancelDeleteProduct = useCallback(() => {
+    setIsDeleteDialogOpen(false)
+    setProductToDelete(null)
   }, [])
 
   const handleCloseDrawer = useCallback(() => {
@@ -136,30 +153,6 @@ export default function AdminProductsPage() {
                   <Search className='text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
                   <Input placeholder='Tìm kiếm sản phẩm...' value={searchQuery} onChange={(e) => handleSearch(e.target.value)} className='pl-9 sm:w-64' />
                 </div>
-
-                {/* Category Filter */}
-                <Select onValueChange={handleCategoryFilter} defaultValue='all'>
-                  <SelectTrigger className='w-full sm:w-40'>
-                    <SelectValue placeholder='Danh mục' />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value='all'>Tất cả</SelectItem>
-                    <SelectItem value='MacBook Air'>MacBook Air</SelectItem>
-                    <SelectItem value='MacBook Pro'>MacBook Pro</SelectItem>
-                  </SelectContent>
-                </Select>
-
-                {/* Sort */}
-                <Select onValueChange={handleSortChange} defaultValue='name'>
-                  <SelectTrigger className='w-full sm:w-40'>
-                    <SelectValue placeholder='Sắp xếp' />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value='name'>Tên A-Z</SelectItem>
-                    <SelectItem value='price-asc'>Giá tăng dần</SelectItem>
-                    <SelectItem value='price-desc'>Giá giảm dần</SelectItem>
-                  </SelectContent>
-                </Select>
               </div>
             </div>
           </CardHeader>
@@ -170,13 +163,29 @@ export default function AdminProductsPage() {
               currentPage={currentPage}
               totalPages={paginationData.totalPages}
               onPageChange={handlePageChange}
-              onViewProduct={handleViewProduct}
+              onHandleAction={handleAction}
             />
           </CardContent>
         </Card>
 
         {/* Product Detail Drawer */}
         <ProductDetailDrawer product={selectedProduct} isOpen={isDrawerOpen} onClose={handleCloseDrawer} onSave={handleSaveProduct} />
+
+        {/* Delete Confirmation Dialog */}
+        <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Xác nhận xóa sản phẩm</AlertDialogTitle>
+              <AlertDialogDescription>Bạn có chắc chắn muốn xóa sản phẩm "{productToDelete?.title}"? Hành động này không thể hoàn tác.</AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel onClick={cancelDeleteProduct}>Hủy</AlertDialogCancel>
+              <AlertDialogAction onClick={confirmDeleteProduct} className='bg-destructive hover:bg-destructive/90 text-white'>
+                Xóa
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </div>
   )

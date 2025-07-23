@@ -1,16 +1,17 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import { Plus, Edit2, Trash2, Search, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, ArrowUpDown } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Badge } from '@/components/ui/badge'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Separator } from '@/components/ui/separator'
+import { SidebarTrigger } from '@/components/ui/sidebar'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { ArrowUpDown, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Edit2, Plus, Search, Trash2 } from 'lucide-react'
+import { useMemo, useState } from 'react'
+import Link from 'next/link'
 
 interface Category {
   id: string
@@ -220,133 +221,86 @@ export default function CategoriesPage() {
   const parentCategories = categories.filter((cat) => !cat.parentId)
 
   return (
-    <div className='mx-auto w-full max-w-7xl p-6'>
-      <div className='mb-6 flex items-center justify-between'>
-        <div>
-          <h1 className='text-3xl font-bold text-gray-900'>Quản lý danh mục</h1>
-          <p className='mt-1 text-gray-500'>Tổng cộng {filteredAndSortedCategories.length} danh mục</p>
+    <div className='mx-auto w-full max-w-7xl'>
+      <header className='sticky top-0 z-10 flex h-16 shrink-0 items-center justify-between gap-2 border-b bg-white px-4'>
+        <div className='flex items-center gap-2'>
+          <SidebarTrigger className='-ml-1' />
+          <Separator orientation='vertical' className='mr-2 h-4' />
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem className='hidden md:block'>
+                <BreadcrumbLink href='/admin'>Dashboard</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator className='hidden md:block' />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Quản lý sản phẩm</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
         </div>
-        <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-          <DialogTrigger asChild>
-            <Button onClick={() => setEditingCategory(null)}>
-              <Plus className='mr-2 h-4 w-4' />
-              Thêm danh mục
-            </Button>
-          </DialogTrigger>
-          <DialogContent className='max-w-2xl'>
-            <DialogHeader>
-              <DialogTitle>{editingCategory ? 'Chỉnh sửa danh mục' : 'Thêm danh mục mới'}</DialogTitle>
-              <DialogDescription>{editingCategory ? 'Cập nhật thông tin danh mục' : 'Tạo danh mục mới cho sản phẩm của bạn'}</DialogDescription>
-            </DialogHeader>
-            <div className='grid gap-4 py-4'>
-              <div className='grid gap-2'>
-                <Label htmlFor='name'>Tên danh mục</Label>
-                <Input id='name' placeholder='VD: MacBook Pro' defaultValue={editingCategory?.name} />
-              </div>
-              <div className='grid gap-2'>
-                <Label htmlFor='slug'>Đường dẫn (slug)</Label>
-                <Input id='slug' placeholder='VD: macbook-pro' defaultValue={editingCategory?.slug} />
-              </div>
-              <div className='grid gap-2'>
-                <Label htmlFor='parent'>Danh mục cha</Label>
-                <Select defaultValue={editingCategory?.parentId || 'none'}>
-                  <SelectTrigger>
-                    <SelectValue placeholder='Chọn danh mục cha' />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value='none'>Không có (Danh mục gốc)</SelectItem>
-                    {parentCategories.map((cat) => (
-                      <SelectItem key={cat.id} value={cat.id}>
-                        {cat.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className='grid gap-2'>
-                <Label htmlFor='description'>Mô tả</Label>
-                <Textarea id='description' placeholder='Mô tả ngắn về danh mục' defaultValue={editingCategory?.description} rows={3} />
-              </div>
-              <div className='grid gap-2'>
-                <Label htmlFor='status'>Trạng thái</Label>
-                <Select defaultValue={editingCategory?.status || 'active'}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value='active'>Hoạt động</SelectItem>
-                    <SelectItem value='inactive'>Không hoạt động</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            <DialogFooter>
-              <Button variant='outline' onClick={() => setIsAddDialogOpen(false)}>
-                Hủy
-              </Button>
-              <Button onClick={() => setIsAddDialogOpen(false)}>{editingCategory ? 'Cập nhật' : 'Thêm mới'}</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+
+        <Link href='/admin/categories/new'>
+          <Button className='gap-2'>
+            <Plus className='h-4 w-4' />
+            Thêm danh mục
+          </Button>
+        </Link>
+      </header>
+      {/* Filters and Search */}
+      <div className='flex flex-col gap-4 p-6 pb-4 sm:flex-row'>
+        <div className='flex-1'>
+          <div className='relative'>
+            <Search className='absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400' />
+            <Input
+              placeholder='Tìm kiếm danh mục...'
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value)
+                setCurrentPage(1)
+              }}
+              className='pl-10'
+            />
+          </div>
+        </div>
+        <Select
+          value={filterStatus}
+          onValueChange={(value: any) => {
+            setFilterStatus(value)
+            setCurrentPage(1)
+          }}
+        >
+          <SelectTrigger className='w-[180px]'>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value='all'>Tất cả trạng thái</SelectItem>
+            <SelectItem value='active'>Hoạt động</SelectItem>
+            <SelectItem value='inactive'>Không hoạt động</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select
+          value={itemsPerPage.toString()}
+          onValueChange={(value) => {
+            setItemsPerPage(Number(value))
+            setCurrentPage(1)
+          }}
+        >
+          <SelectTrigger className='w-[100px]'>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value='10'>10</SelectItem>
+            <SelectItem value='20'>20</SelectItem>
+            <SelectItem value='50'>50</SelectItem>
+            <SelectItem value='100'>100</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
-      {/* Filters and Search */}
-      <Card className='mb-6 p-4'>
-        <div className='flex flex-col gap-4 sm:flex-row'>
-          <div className='flex-1'>
-            <div className='relative'>
-              <Search className='absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400' />
-              <Input
-                placeholder='Tìm kiếm danh mục...'
-                value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value)
-                  setCurrentPage(1)
-                }}
-                className='pl-10'
-              />
-            </div>
-          </div>
-          <Select
-            value={filterStatus}
-            onValueChange={(value: any) => {
-              setFilterStatus(value)
-              setCurrentPage(1)
-            }}
-          >
-            <SelectTrigger className='w-[180px]'>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value='all'>Tất cả trạng thái</SelectItem>
-              <SelectItem value='active'>Hoạt động</SelectItem>
-              <SelectItem value='inactive'>Không hoạt động</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select
-            value={itemsPerPage.toString()}
-            onValueChange={(value) => {
-              setItemsPerPage(Number(value))
-              setCurrentPage(1)
-            }}
-          >
-            <SelectTrigger className='w-[100px]'>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value='10'>10</SelectItem>
-              <SelectItem value='20'>20</SelectItem>
-              <SelectItem value='50'>50</SelectItem>
-              <SelectItem value='100'>100</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-      </Card>
-
       {/* Table */}
-      <Card>
+      <Card className='m-6 mt-0 p-2 pt-0'>
         <div className='overflow-x-auto'>
-          <Table>
+          <Table className=''>
             <TableHeader>
               <TableRow>
                 <TableHead className='w-[50px]'>STT</TableHead>
@@ -376,7 +330,7 @@ export default function CategoriesPage() {
                     <ArrowUpDown className='h-4 w-4' />
                   </button>
                 </TableHead>
-                <TableHead className='text-right'>Thao tác</TableHead>
+                <TableHead className='text-right whitespace-nowrap'>Thao tác</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
