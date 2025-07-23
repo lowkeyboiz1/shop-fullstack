@@ -15,7 +15,8 @@ import { AdminProductTable } from '@/components/AdminProductTable'
 import { ProductDetailDrawer } from '@/components/ProductDetailDrawer'
 import { useAtom } from 'jotai'
 import { filteredProductsAtom, filterOptionsAtom, sortOptionAtom, searchQueryAtom } from '@/store/atoms'
-import { MacBookProduct } from '@/types/product'
+import { TProduct } from '@/types/product'
+import Link from 'next/link'
 
 export default function AdminProductsPage() {
   const [products] = useAtom(filteredProductsAtom)
@@ -23,7 +24,7 @@ export default function AdminProductsPage() {
   const [sortOption, setSortOption] = useAtom(sortOptionAtom)
   const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom)
   const [currentPage, setCurrentPage] = useState(1)
-  const [selectedProduct, setSelectedProduct] = useState<MacBookProduct | null>(null)
+  const [selectedProduct, setSelectedProduct] = useState<TProduct | null>(null)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const itemsPerPage = 10
 
@@ -71,7 +72,7 @@ export default function AdminProductsPage() {
     setCurrentPage(page)
   }, [])
 
-  const handleViewProduct = useCallback((product: MacBookProduct) => {
+  const handleViewProduct = useCallback((product: TProduct) => {
     setSelectedProduct(product)
     setIsDrawerOpen(true)
   }, [])
@@ -81,7 +82,7 @@ export default function AdminProductsPage() {
     setSelectedProduct(null)
   }, [])
 
-  const handleSaveProduct = useCallback((updatedProduct: MacBookProduct) => {
+  const handleSaveProduct = useCallback((updatedProduct: TProduct) => {
     console.log('Product updated:', updatedProduct)
     // TODO: Implement update logic (call API)
     // For now, just close drawer
@@ -108,10 +109,12 @@ export default function AdminProductsPage() {
           </Breadcrumb>
         </div>
 
-        <Button className='gap-2'>
-          <Plus className='h-4 w-4' />
-          Thêm sản phẩm
-        </Button>
+        <Link href='/admin/products/new'>
+          <Button className='gap-2'>
+            <Plus className='h-4 w-4' />
+            Thêm sản phẩm
+          </Button>
+        </Link>
       </header>
 
       {/* Main Content */}
@@ -155,8 +158,6 @@ export default function AdminProductsPage() {
                     <SelectItem value='name'>Tên A-Z</SelectItem>
                     <SelectItem value='price-asc'>Giá tăng dần</SelectItem>
                     <SelectItem value='price-desc'>Giá giảm dần</SelectItem>
-                    <SelectItem value='date-desc'>Mới nhất</SelectItem>
-                    <SelectItem value='date-asc'>Cũ nhất</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

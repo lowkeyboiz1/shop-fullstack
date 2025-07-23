@@ -14,60 +14,17 @@ interface ProductDetailPageProps {
   }>
 }
 
-// Constants
-const COLOR_MAPPING: Record<string, string> = {
-  Midnight: '#1a1a1a',
-  Starlight: '#f5f5dc',
-  'Space Gray': '#7d7d7d',
-  Silver: '#c0c0c0',
-  'Space Black': '#2c2c2c',
-  Gold: '#ffd700',
-  'Rose Gold': '#e8b4a0'
-}
-
-const MEMORY_OPTIONS = [
-  { size: '8GB', label: '8GB unified memory', price: 0 },
-  { size: '16GB', label: '16GB unified memory', price: 200 },
-  { size: '18GB', label: '18GB unified memory', price: 300 },
-  { size: '24GB', label: '24GB unified memory', price: 400 },
-  { size: '36GB', label: '36GB unified memory', price: 800 },
-  { size: '48GB', label: '48GB unified memory', price: 1200 },
-  { size: '64GB', label: '64GB unified memory', price: 1600 },
-  { size: '96GB', label: '96GB unified memory', price: 2400 },
-  { size: '128GB', label: '128GB unified memory', price: 3200 }
-]
-
-const STORAGE_OPTIONS = [
-  { size: '256GB', label: '256GB SSD storage', price: 0 },
-  { size: '512GB', label: '512GB SSD storage', price: 200 },
-  { size: '1TB', label: '1TB SSD storage', price: 500 },
-  { size: '2TB', label: '2TB SSD storage', price: 1000 },
-  { size: '4TB', label: '4TB SSD storage', price: 2000 },
-  { size: '8TB', label: '8TB SSD storage', price: 4000 }
-]
-
-// Utility functions
-const getAvailableMemoryOptions = (product: any) => {
-  return MEMORY_OPTIONS.filter((option) => product.ram?.includes(option.size))
-}
-
-const getAvailableStorageOptions = (product: any) => {
-  return STORAGE_OPTIONS.filter((option) => product.storage?.includes(option.size))
-}
-
 const generateStructuredData = (product: any) => ({
   '@context': 'https://schema.org',
   '@type': 'Product',
-  name: `${product.name} ${product.model}`,
+  name: product.title,
   description: product.description,
   image: product.images,
   brand: { '@type': 'Brand', name: 'Apple' },
-  model: product.model,
-  releaseDate: product.releaseDate,
   offers: {
     '@type': 'Offer',
     priceCurrency: 'USD',
-    price: product.price,
+    price: product.basePrice,
     availability: 'https://schema.org/InStock',
     seller: { '@type': 'Organization', name: 'MacBook Showcase' }
   },
@@ -81,7 +38,8 @@ const generateStructuredData = (product: any) => ({
 // Generate metadata for SEO
 export async function generateMetadata({ params }: ProductDetailPageProps): Promise<Metadata> {
   const resolvedParams = await params
-  const product = macbookProducts.find((p) => p.id === resolvedParams.id)
+  const decodedTitle = decodeURIComponent(resolvedParams.id)
+  const product = macbookProducts.find((p) => p.title === decodedTitle)
 
   if (!product) {
     return {
@@ -91,35 +49,35 @@ export async function generateMetadata({ params }: ProductDetailPageProps): Prom
   }
 
   return {
-    title: `${product.name} ${product.model} (${product.year}) - MacBook Showcase`,
-    description: `${product.description} Starting at $${product.price.toLocaleString()}. Features ${product.chip} chip, ${product.display.size} display, and ${product.battery} battery life.`,
-    keywords: [product.name, product.model, product.chip, 'MacBook', product.category, product.year.toString(), ...product.features],
+    title: `${product.title} - MacBook Showcase`,
+    description: `${product.description} Starting at $${product.basePrice.toLocaleString()}.`,
+    keywords: [product.title, 'MacBook', 'Apple', 'M3', 'M2', 'laptop', 'computer', 'Apple Silicon'],
     openGraph: {
-      title: `${product.name} ${product.model} (${product.year})`,
+      title: product.title,
       description: product.description,
       images: [
         {
           url: product.images[0],
           width: 1200,
           height: 630,
-          alt: product.name
+          alt: product.title
         }
       ],
       type: 'website'
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${product.name} ${product.model} (${product.year})`,
+      title: product.title,
       description: product.description,
       images: [product.images[0]]
     }
   }
 }
 
-// Generate static params for all products (SSG)
+// Generate static params for all products
 export async function generateStaticParams() {
   return macbookProducts.map((product) => ({
-    id: product.id
+    id: encodeURIComponent(product.title)
   }))
 }
 
@@ -127,13 +85,10 @@ export async function generateStaticParams() {
 const ProductBadges = ({ product }: { product: any }) => (
   <div className='flex items-center gap-3'>
     <Badge variant='secondary' className='bg-blue-100 text-blue-700 hover:bg-blue-200'>
-      {product.model}
+      MacBook
     </Badge>
     <Badge variant='outline' className='border-slate-300'>
-      {product.year}
-    </Badge>
-    <Badge variant='outline' className='border-slate-300'>
-      {product.category}
+      Apple Silicon
     </Badge>
     <div className='ml-auto flex items-center gap-1'>
       {[...Array(5)].map((_, i) => (
@@ -147,9 +102,10 @@ const ProductBadges = ({ product }: { product: any }) => (
 const ProductHeader = ({ product }: { product: any }) => (
   <div className='space-y-4'>
     <ProductBadges product={product} />
-    <h1 className='bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-4xl font-bold text-transparent'>{product.name}</h1>
+    <h1 className='bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-4xl font-bold text-transparent'>{product.title}</h1>
     <div className='flex items-baseline gap-3'>
-      <span className='text-4xl font-bold text-slate-900'>${product.price.toLocaleString()}</span>
+      <span className='text-4xl font-bold text-slate-900'>${product.basePrice.toLocaleString()}</span>
+      <span className='text-lg text-slate-600'>starting from</span>
     </div>
     <p className='text-lg leading-relaxed text-slate-600'>{product.description}</p>
   </div>
@@ -162,7 +118,7 @@ const ProductImageGallery = ({ product }: { product: any }) => (
         <div className='absolute inset-0 bg-gradient-to-br from-blue-50/30 to-purple-50/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
         <Image
           src={product.images[0]}
-          alt={product.name}
+          alt={product.title}
           width={600}
           height={600}
           className='relative z-10 h-full w-full object-contain transition-transform duration-500 group-hover:scale-105'
@@ -174,7 +130,7 @@ const ProductImageGallery = ({ product }: { product: any }) => (
     <div className='grid grid-cols-4 gap-3'>
       {product.images.slice(0, 4).map((image: string, index: number) => (
         <div key={index} className='aspect-square rounded-xl border-2 border-slate-200/50 bg-white p-3 shadow-sm'>
-          <Image src={image} alt={`${product.name} view ${index + 1}`} width={150} height={150} className='h-full w-full object-contain opacity-70' />
+          <Image src={image} alt={`${product.title} view ${index + 1}`} width={150} height={150} className='h-full w-full object-contain opacity-70' />
         </div>
       ))}
     </div>
@@ -183,14 +139,13 @@ const ProductImageGallery = ({ product }: { product: any }) => (
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
   const resolvedParams = await params
-  const product = macbookProducts.find((p) => p.id === resolvedParams.id)
+  const decodedTitle = decodeURIComponent(resolvedParams.id)
+  const product = macbookProducts.find((p) => p.title === decodedTitle)
 
   if (!product) {
     notFound()
   }
 
-  const memoryOptions = getAvailableMemoryOptions(product)
-  const storageOptions = getAvailableStorageOptions(product)
   const structuredData = generateStructuredData(product)
 
   return (
@@ -199,12 +154,22 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
       <div className='min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100'>
         <div className='mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8'>
+          {/* Back Button */}
+          <div className='mb-8'>
+            <Link href='/'>
+              <Button variant='ghost' className='gap-2 text-slate-600 hover:text-slate-900'>
+                <ArrowLeft className='h-4 w-4' />
+                Back to Products
+              </Button>
+            </Link>
+          </div>
+
           <div className='grid items-start gap-16 lg:grid-cols-2'>
             <ProductImageGallery product={product} />
 
             <div className='space-y-8'>
               <ProductHeader product={product} />
-              <ProductDetailClient product={product} memoryOptions={memoryOptions} storageOptions={storageOptions} colorMapping={COLOR_MAPPING} />
+              <ProductDetailClient product={product} />
             </div>
           </div>
         </div>

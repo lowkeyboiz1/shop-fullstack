@@ -38,7 +38,7 @@ export default async function Home() {
         <FilterControls />
 
         {/* Product Grid - Server Component with Client Interactivity */}
-        <ProductGridServer initialProducts={macbookProducts} />
+        <ProductGridServer />
       </div>
     </main>
   )

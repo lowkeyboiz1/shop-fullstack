@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MacBookProduct } from '@/types/product'
+import { TProduct } from '@/types/product'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
@@ -11,24 +11,24 @@ import { MoreHorizontal, Edit, Trash2, Eye, ChevronLeft, ChevronRight } from 'lu
 import { formatPrice } from '@/lib/utils'
 
 interface AdminProductTableProps {
-  products: MacBookProduct[]
+  products: TProduct[]
   currentPage: number
   totalPages: number
   onPageChange: (page: number) => void
-  onViewProduct?: (product: MacBookProduct) => void
+  onViewProduct?: (product: TProduct) => void
 }
 
 interface ProductRowProps {
-  product: MacBookProduct
+  product: TProduct
   index: number
-  onViewProduct?: (product: MacBookProduct) => void
+  onViewProduct?: (product: TProduct) => void
 }
 
 function ProductRow({ product, index, onViewProduct }: ProductRowProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const handleAction = (action: string) => {
-    console.log(`${action}:`, product.id)
+    console.log(`${action}:`, product.title)
     setIsMenuOpen(false)
 
     if (action === 'view' && onViewProduct) {
@@ -36,6 +36,12 @@ function ProductRow({ product, index, onViewProduct }: ProductRowProps) {
     }
     // TODO: Implement other CRUD actions
   }
+
+  // Extract info from product structure
+  const category = product.title.includes('Air') ? 'MacBook Air' : 'MacBook Pro'
+  const processor = product.options.find((opt) => opt.name === 'Processor')?.variants[0]?.label || 'Apple Silicon'
+  const ram = product.options.find((opt) => opt.name === 'RAM')?.variants[0]?.label || '8GB'
+  const storage = product.options.find((opt) => opt.name === 'Storage')?.variants[0]?.label || '256GB'
 
   return (
     <tr className={`group hover:bg-muted/50 border-b transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}>
@@ -48,7 +54,7 @@ function ProductRow({ product, index, onViewProduct }: ProductRowProps) {
                 product.images[0] ||
                 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSIgZm9udC1zaXplPSIzNiIgZmlsbD0iIzlDQTNBRiI+TWFjQm9vazwvdGV4dD4KPC9zdmc+'
               }
-              alt={product.name}
+              alt={product.title}
               fill
               className='object-contain p-1'
               onError={(e) => {
@@ -59,9 +65,9 @@ function ProductRow({ product, index, onViewProduct }: ProductRowProps) {
             />
           </div>
           <div className='min-w-0 flex-1'>
-            <Link href={`/products/${product.id}`} className='group-hover:text-blue-600'>
-              <p className='text-sm font-medium text-gray-900 transition-colors'>{product.name}</p>
-              <p className='text-xs text-gray-500'>{product.model}</p>
+            <Link href={`/products/${encodeURIComponent(product.title)}`} className='group-hover:text-blue-600'>
+              <p className='text-sm font-medium text-gray-900 transition-colors'>{product.title}</p>
+              <p className='text-xs text-gray-500'>Starting at ${product.basePrice}</p>
             </Link>
           </div>
         </div>
@@ -69,36 +75,41 @@ function ProductRow({ product, index, onViewProduct }: ProductRowProps) {
 
       {/* Category */}
       <td className='p-4'>
-        <Badge variant={product.category === 'MacBook Pro' ? 'default' : 'secondary'} className='text-xs'>
-          {product.category}
+        <Badge variant={category === 'MacBook Pro' ? 'default' : 'secondary'} className='text-xs'>
+          {category}
         </Badge>
       </td>
 
-      {/* Chip */}
+      {/* Processor */}
       <td className='p-4'>
-        <div className='text-sm text-gray-900'>{product.chip}</div>
-        <div className='text-xs text-gray-500'>{product.chipDetails.cpu}</div>
+        <div className='text-sm text-gray-900'>{processor}</div>
+        <div className='text-xs text-gray-500'>Apple Silicon</div>
       </td>
 
       {/* RAM & Storage */}
       <td className='p-4'>
         <div className='text-sm text-gray-900'>
-          {product.ram[0]} / {product.storage[0]}
+          {ram} / {storage}
         </div>
         <div className='text-xs text-gray-500'>
-          {product.ram.length > 1 && `+${product.ram.length - 1} RAM`}
-          {product.storage.length > 1 && ` | +${product.storage.length - 1} Storage`}
+          {product.options.find((opt) => opt.name === 'RAM')?.variants.length! > 1 && `+${product.options.find((opt) => opt.name === 'RAM')?.variants.length! - 1} RAM options`}
+          {product.options.find((opt) => opt.name === 'Storage')?.variants.length! > 1 && ` | +${product.options.find((opt) => opt.name === 'Storage')?.variants.length! - 1} Storage options`}
         </div>
       </td>
 
       {/* Price */}
       <td className='p-4'>
-        <div className='text-sm font-semibold text-red-600'>{formatPrice(product.price)}đ</div>
+        <div className='text-sm font-semibold text-red-600'>{formatPrice(product.basePrice)}đ</div>
+        <div className='text-xs text-gray-500'>Base price</div>
       </td>
 
-      {/* Year */}
+      {/* Colors */}
       <td className='p-4'>
-        <div className='text-sm text-gray-900'>{product.year}</div>
+        <div className='text-sm text-gray-900'>{product.colors.length} colors</div>
+        <div className='text-xs text-gray-500'>
+          {product.colors.slice(0, 2).join(', ')}
+          {product.colors.length > 2 && '...'}
+        </div>
       </td>
 
       {/* Actions */}
@@ -176,16 +187,16 @@ export function AdminProductTable({ products, currentPage, totalPages, onPageCha
               <tr>
                 <th className='px-4 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase'>Sản phẩm</th>
                 <th className='px-4 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase'>Danh mục</th>
-                <th className='px-4 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase'>Chip</th>
+                <th className='px-4 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase'>Processor</th>
                 <th className='px-4 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase'>RAM / Storage</th>
                 <th className='px-4 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase'>Giá</th>
-                <th className='px-4 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase'>Năm</th>
+                <th className='px-4 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase'>Màu sắc</th>
                 <th className='px-4 py-3 text-right text-xs font-medium tracking-wide text-gray-500 uppercase'>Thao tác</th>
               </tr>
             </thead>
             <tbody className='divide-y divide-gray-200 bg-white'>
               {products.map((product, index) => (
-                <ProductRow key={product.id} product={product} index={index} onViewProduct={onViewProduct} />
+                <ProductRow key={product.title} product={product} index={index} onViewProduct={onViewProduct} />
               ))}
             </tbody>
           </table>
@@ -193,40 +204,36 @@ export function AdminProductTable({ products, currentPage, totalPages, onPageCha
       </div>
 
       {/* Pagination */}
-      {totalPages > 1 && (
-        <div className='flex items-center justify-between'>
-          <div className='text-sm text-gray-500'>
-            Trang {currentPage} của {totalPages}
-          </div>
-
-          <div className='flex items-center space-x-1'>
-            <Button variant='outline' size='sm' onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1} className='gap-1'>
-              <ChevronLeft className='h-4 w-4' />
-              Trước
-            </Button>
-
-            <div className='flex items-center space-x-1'>
-              {generatePageNumbers().map((page, index) => (
-                <Button
-                  key={index}
-                  variant={page === currentPage ? 'default' : 'outline'}
-                  size='sm'
-                  onClick={() => typeof page === 'number' && onPageChange(page)}
-                  disabled={page === '...'}
-                  className='min-w-[36px]'
-                >
-                  {page}
-                </Button>
-              ))}
-            </div>
-
-            <Button variant='outline' size='sm' onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages} className='gap-1'>
-              Sau
-              <ChevronRight className='h-4 w-4' />
-            </Button>
-          </div>
+      <div className='flex items-center justify-between rounded-lg border bg-white px-4 py-3'>
+        <div className='flex items-center gap-2'>
+          <Button variant='outline' size='sm' onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
+            <ChevronLeft className='h-4 w-4' />
+            Previous
+          </Button>
         </div>
-      )}
+
+        <div className='flex items-center gap-1'>
+          {generatePageNumbers().map((page, index) => (
+            <Button
+              key={index}
+              variant={page === currentPage ? 'default' : 'ghost'}
+              size='sm'
+              onClick={() => typeof page === 'number' && onPageChange(page)}
+              disabled={page === '...'}
+              className={page === '...' ? 'cursor-default' : ''}
+            >
+              {page}
+            </Button>
+          ))}
+        </div>
+
+        <div className='flex items-center gap-2'>
+          <Button variant='outline' size='sm' onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+            Next
+            <ChevronRight className='h-4 w-4' />
+          </Button>
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import { filteredProductsAtom } from '@/store/atoms'
-import { PromotionalOffer, PRODUCT_TAGS } from '@/types/product'
+import { PromotionalOffer } from '@/types/product'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { ProductCard } from './ProductCard'
@@ -46,7 +46,7 @@ export function ProductGrid() {
         const { tag } = getProductOffers(index)
         return (
           <div
-            key={product.id}
+            key={product.title}
             className='animate-in fade-in-50 slide-in-from-bottom-3'
             style={{
               animationDuration: '500ms',
